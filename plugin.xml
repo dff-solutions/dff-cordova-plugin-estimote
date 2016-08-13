@@ -28,6 +28,14 @@
         </config-file>
         
         <source-file src="libs/classes.jar" target-dir="libs" />
+        
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/EstimoteAction.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StartMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StopMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/BeaconMonitoringListener.java" target-dir="src/com/dff/cordova/plugin/estimote" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/EstimotePlugin.java" target-dir="src/com/dff/cordova/plugin/estimote" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBeacon.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonRegion.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
     
      </platform>
 </plugin>

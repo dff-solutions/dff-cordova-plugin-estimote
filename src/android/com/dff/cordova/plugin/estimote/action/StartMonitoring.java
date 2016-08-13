@@ -7,9 +7,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.dff.cordova.plugin.common.log.CordovaPluginLog;
+import com.dff.cordova.plugin.estimote.json.model.JsonRegion;
 import com.estimote.sdk.BeaconManager;
-
-import android.graphics.Region;
+import com.estimote.sdk.Region;
 
 public class StartMonitoring extends EstimoteAction {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.action.StartMonitoring";
@@ -24,9 +24,9 @@ public class StartMonitoring extends EstimoteAction {
 	public void run() {
 		super.run();
 		
-		JSONObject jsonArgs = this.args.getJSONObject(0);
-		
 		try {
+			JSONObject jsonArgs = this.args.getJSONObject(0);
+			
 			if (jsonArgs != null) {
 				Region region = JsonRegion.fromJson(jsonArgs);
 				this.beaconManager.startMonitoring(region);
