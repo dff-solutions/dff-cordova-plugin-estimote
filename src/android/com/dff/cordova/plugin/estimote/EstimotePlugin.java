@@ -4,15 +4,19 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.estimote.sdk.BeaconManager;
-
 import com.dff.cordova.plugin.common.CommonPlugin;
+import com.dff.cordova.plugin.common.action.CordovaAction;
 import com.dff.cordova.plugin.common.log.CordovaPluginLog;
+import com.dff.cordova.plugin.estimote.action.StartMonitoring;
+import com.dff.cordova.plugin.estimote.action.StopMonitoring;
+import com.estimote.sdk.BeaconManager;
 
 public class EstimotePlugin extends CommonPlugin {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.EstimotePlugin";
 	
-	BeaconManager beaconManager;
+	private boolean serviceConnected = false;
+	private BeaconManager beaconManager;
+	private BeaconMonitoringListener  beaconMonitoringListener;
 	
 	public EstimotePlugin() {
 		super(LOG_TAG);
@@ -25,6 +29,16 @@ public class EstimotePlugin extends CommonPlugin {
 	public void pluginInitialize() {
 		super.pluginInitialize();
 		beaconManager = new BeaconManager(this.cordova.getActivity());
+		
+		beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+		    @Override
+		    public void onServiceReady() {
+		    	serviceConnected = true;
+		    }
+		});
+		
+		beaconMonitoringListener = new BeaconMonitoringListener();
+		beaconManager.setMonitoringListener(this.beaconMonitoringListener);
 	}
 	
     /**
@@ -68,6 +82,40 @@ public class EstimotePlugin extends CommonPlugin {
          throws JSONException {
  		
      	CordovaPluginLog.i(LOG_TAG, "call for action: " + action + "; args: " + args);
+     	
+     	if (!serviceConnected) {
+     		callbackContext.error("service not connected");
+     		return false;
+     	}
+     	
+     	CordovaAction cordovaAction = null;
+    	
+    	if (action.equals(StartMonitoring.ACTION_NAME)) {
+    		cordovaAction = new StartMonitoring(
+    				action,
+    				args,
+    				callbackContext,
+    				this.cordova,
+    				this.beaconManager
+				);
+    	}
+    	else if (action.equals(StopMonitoring.ACTION_NAME)) {
+    		cordovaAction = new StopMonitoring(
+    				action,
+    				args,
+    				callbackContext,
+    				this.cordova,
+    				this.beaconManager
+				);
+    	}
+    	else if ("onRegionChange".equals(action)) {
+    		this.beaconMonitoringListener.setCallBack(callbackContext);
+    	}    	
+    	
+    	if (cordovaAction != null) {
+    		cordova.getThreadPool().execute(cordovaAction);
+            return true;
+    	} 
      	
      	return super.execute(action, args, callbackContext);
      }

@@ -11,14 +11,16 @@ var cordova = require('cordova');
 var feature = "EstimotePlugin";
 var self = {};
 
-/*
- * Register callbacks for packagepay log messages.
- *
- * @param {Function} success         - Callback if action is successful.
- * @param {Function} error           - Callback if action is not successful.
- */
-self.onLog = function (success, error) {
-    cordova.exec(success, error, feature, "onLog", []);
-};
+var actions = ["onLog", "onRegionChange", "startMonitoring", "stopMonitoring"];
+
+function createActionFunction (action) {
+    return function (success, error, args) {
+        cordova.exec(success, error, feature, action, [args]);
+    }
+}
+
+actions.forEach(function (action) {
+    self[action] = createActionFunction(action);
+});
 
 module.exports = self;
