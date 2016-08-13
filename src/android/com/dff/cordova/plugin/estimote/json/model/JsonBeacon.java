@@ -1,7 +1,9 @@
 package com.dff.cordova.plugin.estimote.json.model;
 
+import java.util.List;
 import java.util.UUID;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,18 @@ public class JsonBeacon {
 		jsonThread.put("proximityUUID", beacon.getProximityUUID());
 		
 		return jsonThread;
+	}
+	
+	public static JSONArray toJson(List<Beacon> beacons) throws JSONException {
+		JSONArray jsonBeacons = new JSONArray();
+		
+		if (beacons != null) {
+			for	(Beacon b : beacons) {
+				jsonBeacons.put(toJson(b));
+			}
+		}
+		
+		return jsonBeacons;		
 	}
 	
 	public static Beacon fromJson(JSONObject jsonBeacon) throws JSONException {
