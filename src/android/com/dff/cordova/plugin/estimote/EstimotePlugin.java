@@ -58,6 +58,7 @@ public class EstimotePlugin extends CommonPlugin {
 	@Override
 	public void onDestroy() {		
 		super.onDestroy();
+		this.beaconManager.disconnect();
 	}
 	
     /**
