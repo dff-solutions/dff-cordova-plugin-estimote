@@ -16,8 +16,14 @@ import com.dff.cordova.plugin.estimote.action.StartMonitoring;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
 import com.estimote.sdk.BeaconManager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+
 public class EstimotePlugin extends CommonPlugin {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.EstimotePlugin";
+	
+	public static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+	public static final int ACCESS_COARSE_LOCATION_REQ_CODE = 0;
 	private HashMap<String, Class<? extends EstimoteAction>> actions = new HashMap<String, Class<? extends EstimoteAction>>();
 	private boolean serviceConnected = false;
 	private BeaconManager beaconManager;
@@ -56,7 +62,9 @@ public class EstimotePlugin extends CommonPlugin {
     public void onResume(boolean multitasking) {
     	super.onResume(multitasking);
     	
-    	// SystemRequirementsChecker.checkWithDefaultDialogs(this);
+    	if (!this.cordova.hasPermission(ACCESS_COARSE_LOCATION)) {
+    		this.cordova.requestPermission(this, ACCESS_COARSE_LOCATION_REQ_CODE, ACCESS_COARSE_LOCATION);
+    	}
     }
     
     /**
@@ -67,6 +75,27 @@ public class EstimotePlugin extends CommonPlugin {
 		super.onDestroy();
 		this.beaconManager.disconnect();
 	}
+	
+    @Override
+    public void onRequestPermissionResult(int requestCode, String[] permissions,
+            int[] grantResults) throws JSONException {
+    	
+    	super.onRequestPermissionResult(requestCode, permissions, grantResults);
+    	
+    	CordovaPluginLog.d(LOG_TAG, "onRequestPermissionResult: " + requestCode);
+    
+    	for (int i = 0; i < grantResults.length; i++) {
+    		int r = grantResults[i];
+    		String p = permissions[i];
+    		
+    		if (r == PackageManager.PERMISSION_DENIED) {
+    			CordovaPluginLog.d(LOG_TAG, "permission denied for: " + p);
+    		}
+    		else if (r == PackageManager.PERMISSION_GRANTED) {
+    			CordovaPluginLog.d(LOG_TAG, "permission granted for: " + p);
+    		}   		    		
+    	}
+    }
 	
     /**
      * Executes the request.
