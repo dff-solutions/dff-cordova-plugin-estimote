@@ -1,25 +1,32 @@
 package com.dff.cordova.plugin.estimote;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.dff.cordova.plugin.common.CommonPlugin;
 import com.dff.cordova.plugin.common.action.CordovaAction;
 import com.dff.cordova.plugin.common.log.CordovaPluginLog;
+import com.dff.cordova.plugin.estimote.action.EstimoteAction;
 import com.dff.cordova.plugin.estimote.action.StartMonitoring;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
 import com.estimote.sdk.BeaconManager;
 
 public class EstimotePlugin extends CommonPlugin {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.EstimotePlugin";
-	
+	private HashMap<String, Class<? extends EstimoteAction>> actions = new HashMap<String, Class<? extends EstimoteAction>>();
 	private boolean serviceConnected = false;
 	private BeaconManager beaconManager;
 	private BeaconMonitoringListener  beaconMonitoringListener;
 	
 	public EstimotePlugin() {
 		super(LOG_TAG);
+		actions.put(StartMonitoring.ACTION_NAME, StartMonitoring.class);
+		actions.put(StopMonitoring.ACTION_NAME, StopMonitoring.class);
 	}
 	
    /**
@@ -91,27 +98,39 @@ public class EstimotePlugin extends CommonPlugin {
      	
      	CordovaAction cordovaAction = null;
     	
-    	if (action.equals(StartMonitoring.ACTION_NAME)) {
-    		cordovaAction = new StartMonitoring(
-    				action,
-    				args,
-    				callbackContext,
-    				this.cordova,
-    				this.beaconManager
-				);
+    	if ("onEnteredRegion".equals(action)) {
+    		this.beaconMonitoringListener.setOnEnteredRegionCallback(callbackContext);
     	}
-    	else if (action.equals(StopMonitoring.ACTION_NAME)) {
-    		cordovaAction = new StopMonitoring(
-    				action,
-    				args,
-    				callbackContext,
-    				this.cordova,
-    				this.beaconManager
-				);
+    	else if ("onExitedRegion".equals(action)) {
+    		this.beaconMonitoringListener.setOnExitedRegionCallback(callbackContext);
     	}
-    	else if ("onRegionChange".equals(action)) {
-    		this.beaconMonitoringListener.setCallBack(callbackContext);
-    	}    	
+    	else if (actions.containsKey(action)) {     		
+     		Class<? extends EstimoteAction> actionClass = actions.get(action);
+     		
+     		CordovaPluginLog.d(LOG_TAG, "found action: " + actionClass.getName());
+     		
+     		try {
+				cordovaAction = actionClass.getConstructor(String.class
+						, JSONArray.class
+						, CallbackContext.class
+						, CordovaInterface.class
+						, BeaconManager.class
+					)
+					.newInstance(action, args, callbackContext, this.cordova, this.beaconManager);
+			} catch (InstantiationException e) {
+				CordovaPluginLog.e(LOG_TAG, e.getMessage(), e);
+			} catch (IllegalAccessException e) {
+				CordovaPluginLog.e(LOG_TAG, e.getMessage(), e);
+			} catch (IllegalArgumentException e) {
+				CordovaPluginLog.e(LOG_TAG, e.getMessage(), e);
+			} catch (InvocationTargetException e) {
+				CordovaPluginLog.e(LOG_TAG, e.getMessage(), e);
+			} catch (NoSuchMethodException e) {
+				CordovaPluginLog.e(LOG_TAG, e.getMessage(), e);
+			} catch (SecurityException e) {
+				CordovaPluginLog.e(LOG_TAG, e.getMessage(), e);
+			}
+     	}
     	
     	if (cordovaAction != null) {
     		cordova.getThreadPool().execute(cordovaAction);

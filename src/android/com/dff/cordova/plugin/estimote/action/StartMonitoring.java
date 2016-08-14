@@ -29,6 +29,7 @@ public class StartMonitoring extends EstimoteAction {
 			
 			if (jsonArgs != null) {
 				Region region = JsonRegion.fromJson(jsonArgs);
+				CordovaPluginLog.d(LOG_TAG, "startMonitoring: " + region.toString());
 				this.beaconManager.startMonitoring(region);
 			}
 			else {
@@ -43,8 +44,6 @@ public class StartMonitoring extends EstimoteAction {
 			CordovaPluginLog.e(this.getClass().getName(), e.getMessage(), e);
 			this.callbackContext.error(e.getMessage());
 		}
-		
-		
 	}
 
 }

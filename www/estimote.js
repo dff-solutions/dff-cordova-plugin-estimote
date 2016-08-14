@@ -11,7 +11,7 @@ var cordova = require('cordova');
 var feature = "EstimotePlugin";
 var self = {};
 
-var actions = ["onLog", "onRegionChange", "startMonitoring", "stopMonitoring"];
+var actions = ["onLog", "onEnteredRegion", "onExitedRegion", "startMonitoring", "stopMonitoring"];
 
 function createActionFunction (action) {
     return function (success, error, args) {

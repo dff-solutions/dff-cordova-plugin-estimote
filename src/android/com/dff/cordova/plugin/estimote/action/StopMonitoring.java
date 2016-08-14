@@ -30,6 +30,8 @@ public class StopMonitoring extends EstimoteAction {
 			if (jsonArgs != null) {
 				
 				Region region = JsonRegion.fromJson(jsonArgs);
+				CordovaPluginLog.d(LOG_TAG, "stopMonitoring: " + region.toString());
+				
 				this.beaconManager.stopMonitoring(region);
 			}
 			else {

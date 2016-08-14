@@ -33,9 +33,12 @@
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StartMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StopMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/BeaconMonitoringListener.java" target-dir="src/com/dff/cordova/plugin/estimote" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/EnteredRegionCallbackHandler.java" target-dir="src/com/dff/cordova/plugin/estimote" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/EstimotePlugin.java" target-dir="src/com/dff/cordova/plugin/estimote" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/ExitedRegionCallbackHandler.java" target-dir="src/com/dff/cordova/plugin/estimote" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBeacon.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonRegion.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
     
      </platform>
 </plugin>
+
