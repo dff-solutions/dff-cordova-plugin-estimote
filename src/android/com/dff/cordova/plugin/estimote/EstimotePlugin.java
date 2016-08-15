@@ -129,9 +129,11 @@ public class EstimotePlugin extends CommonPlugin {
     	
     	if ("onEnteredRegion".equals(action)) {
     		this.beaconMonitoringListener.setOnEnteredRegionCallback(callbackContext);
+    		return true;
     	}
     	else if ("onExitedRegion".equals(action)) {
     		this.beaconMonitoringListener.setOnExitedRegionCallback(callbackContext);
+    		return true;
     	}
     	else if (actions.containsKey(action)) {     		
      		Class<? extends EstimoteAction> actionClass = actions.get(action);
