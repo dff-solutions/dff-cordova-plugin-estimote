@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.cordova.CallbackContext;
 
+import com.dff.cordova.plugin.estimote.EnteredRegionCallbackHandler;
+import com.dff.cordova.plugin.estimote.ExitedRegionCallbackHandler;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager.MonitoringListener;
 import com.estimote.sdk.Region;

@@ -15,7 +15,9 @@ import com.estimote.sdk.Region;
 public class EnteredRegionCallbackHandler extends AbstractPluginListener {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.EnteredRegionCallbackHandler";
 	
-	public void onEnteredRegion(Region region, List<Beacon> beacons) {		
+	public void onEnteredRegion(Region region, List<Beacon> beacons) {
+		CordovaPluginLog.d(LOG_TAG, "entered region: " + region.toString());
+		
 		try {
 			JSONObject jsonEnteredRegion = new JSONObject();
 			jsonEnteredRegion.put("region", JsonRegion.toJson(region));

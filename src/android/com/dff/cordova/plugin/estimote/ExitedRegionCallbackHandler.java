@@ -12,13 +12,12 @@ public class ExitedRegionCallbackHandler extends AbstractPluginListener {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.ExitedRegionCallbackHandler";
 	
 	public void onExitedRegion(Region region) {
-		JSONObject jsonRegion;
-		JSONObject jsonRegionChange = new JSONObject();
+		CordovaPluginLog.d(LOG_TAG, "exited region: " + region.toString());
 		
-		try {			
-			jsonRegion = JsonRegion.toJson(region);
-			jsonRegion.put("region", jsonRegion);
-			this.sendPluginResult(jsonRegionChange);
+		try {
+			JSONObject jsonExitedRegion = new JSONObject();			
+			jsonExitedRegion.put("region", JsonRegion.toJson(region));
+			this.sendPluginResult(jsonExitedRegion);
 		} catch (JSONException e) {
 			CordovaPluginLog.e(LOG_TAG, e.getMessage());
 			this.sendPluginResult(e);
