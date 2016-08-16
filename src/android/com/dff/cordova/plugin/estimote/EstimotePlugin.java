@@ -22,8 +22,13 @@ import android.content.pm.PackageManager;
 public class EstimotePlugin extends CommonPlugin {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.EstimotePlugin";
 	
-	public static final String ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-	public static final int ACCESS_COARSE_LOCATION_REQ_CODE = 0;
+	private static String[] permissions = new String[] {
+			Manifest.permission.BLUETOOTH,
+			Manifest.permission.BLUETOOTH_ADMIN,
+			Manifest.permission.ACCESS_COARSE_LOCATION,
+			Manifest.permission.INTERNET,
+			Manifest.permission.ACCESS_NETWORK_STATE
+	};
 	private HashMap<String, Class<? extends EstimoteAction>> actions = new HashMap<String, Class<? extends EstimoteAction>>();
 	private boolean serviceConnected = false;
 	private BeaconManager beaconManager;
@@ -62,8 +67,8 @@ public class EstimotePlugin extends CommonPlugin {
     public void onResume(boolean multitasking) {
     	super.onResume(multitasking);
     	
-    	if (!this.cordova.hasPermission(ACCESS_COARSE_LOCATION)) {
-    		this.cordova.requestPermission(this, ACCESS_COARSE_LOCATION_REQ_CODE, ACCESS_COARSE_LOCATION);
+    	if (!hasPermissions()) {
+    		this.cordova.requestPermissions(this, 0, permissions);
     	}
     }
     
@@ -170,4 +175,15 @@ public class EstimotePlugin extends CommonPlugin {
      	
      	return super.execute(action, args, callbackContext);
      }
+ 	
+ 	private boolean hasPermissions() { 		
+ 		for (String permission : permissions) {
+ 			CordovaPluginLog.d(LOG_TAG, "check permission:" + permission);
+ 			if (!this.cordova.hasPermission(permission)) {
+ 				return false;
+ 			}
+ 		}
+ 		
+ 		return true;
+ 	}
 }
