@@ -9,7 +9,7 @@
     <keywords>phonegap,cordova,estimote,dff</keywords>
     
      <js-module src="www/estimote.js" name="estimote">
-        <clobbers target="EstimotePlugin" />
+        <clobbers target="Estimote" />
     </js-module>
     
     <dependency id="com.dff.cordova.plugins.common" url="https://github.com/dff-solutions/dff.CordovaPlugin.Common.git" />
@@ -19,7 +19,7 @@
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="EstimotePlugin">
                 <param name="android-package" value="com.dff.cordova.plugin.estimote.EstimotePlugin"/>
-                <param name="onload" value="true" />
+                <param name="onload" value="false" />
             </feature>
         </config-file>
         
