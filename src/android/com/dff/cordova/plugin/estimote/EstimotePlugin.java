@@ -30,7 +30,6 @@ public class EstimotePlugin extends CommonPlugin {
 			Manifest.permission.ACCESS_NETWORK_STATE
 	};
 	private HashMap<String, Class<? extends EstimoteAction>> actions = new HashMap<String, Class<? extends EstimoteAction>>();
-	private boolean serviceConnected = false;
 	private BeaconManager beaconManager;
 	private BeaconMonitoringListener  beaconMonitoringListener;
 	
@@ -51,7 +50,6 @@ public class EstimotePlugin extends CommonPlugin {
 		beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
 		    @Override
 		    public void onServiceReady() {
-		    	serviceConnected = true;
 		    }
 		});
 		
@@ -124,12 +122,7 @@ public class EstimotePlugin extends CommonPlugin {
          throws JSONException {
  		
      	CordovaPluginLog.i(LOG_TAG, "call for action: " + action + "; args: " + args);
-     	
-     	if (!serviceConnected) {
-     		callbackContext.error("service not connected");
-     		return false;
-     	}
-     	
+     	    	
      	CordovaAction cordovaAction = null;
     	
     	if ("onEnteredRegion".equals(action)) {
