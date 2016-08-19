@@ -25,19 +25,19 @@ public class JsonRegion {
 		Integer major = null;
 		Integer minor = null;
 		
-		if (jsonRegion.has("identifier")){
+		if (!jsonRegion.isNull("identifier")){
 			identifier = jsonRegion.getString("identifier");
 		}		
 		
-		if (jsonRegion.has("major")){
+		if (!jsonRegion.isNull("major")){
 			major = new Integer(jsonRegion.getInt("major"));
 		}		
 		
-		if (jsonRegion.has("minor")){
+		if (!jsonRegion.isNull("minor")){
 			minor = new Integer(jsonRegion.getInt("minor"));
 		}		
 		
-		if (jsonRegion.has("proximityUUID")) {
+		if (!jsonRegion.isNull("proximityUUID")) {
 			proximityUUID = UUID.fromString(jsonRegion.getString("proximityUUID"));
 		}
 		

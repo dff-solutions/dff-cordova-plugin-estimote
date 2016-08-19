@@ -44,32 +44,32 @@ public class JsonBeacon {
 		MacAddress macAddress = null;
 		UUID proximityUUID = null;
 		
-		if (jsonBeacon.has("major")){
+		if (!jsonBeacon.isNull("major")){
 			major = jsonBeacon.getInt("major");
 		}
 		
 		
-		if (jsonBeacon.has("measuredPower")){
+		if (!jsonBeacon.isNull("measuredPower")){
 			measuredPower = jsonBeacon.getInt("measuredPower");
 		}
 		
 		
-		if (jsonBeacon.has("minor")){
+		if (!jsonBeacon.isNull("minor")){
 			minor = jsonBeacon.getInt("minor");
 		}
 		
 		
-		if (jsonBeacon.has("rssi")){
+		if (!jsonBeacon.isNull("rssi")){
 			rssi = jsonBeacon.getInt("rssi");
 		}
 		
 		
-		if (jsonBeacon.has("macAddress")) {
+		if (!jsonBeacon.isNull("macAddress")) {
 			macAddress = MacAddress.fromString(jsonBeacon.getString("macAddress"));
 		}
 		
 		
-		if (jsonBeacon.has("proximityUUID")) {
+		if (!jsonBeacon.isNull("proximityUUID")) {
 			proximityUUID = UUID.fromString(jsonBeacon.getString("proximityUUID"));
 		}
 		
