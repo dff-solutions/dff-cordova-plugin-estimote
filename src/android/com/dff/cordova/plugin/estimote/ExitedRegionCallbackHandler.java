@@ -1,7 +1,6 @@
 package com.dff.cordova.plugin.estimote;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.dff.cordova.plugin.common.AbstractPluginListener;
 import com.dff.cordova.plugin.common.log.CordovaPluginLog;
@@ -15,9 +14,7 @@ public class ExitedRegionCallbackHandler extends AbstractPluginListener {
 		CordovaPluginLog.d(LOG_TAG, "exited region: " + region.toString());
 		
 		try {
-			JSONObject jsonExitedRegion = new JSONObject();			
-			jsonExitedRegion.put("region", JsonRegion.toJson(region));
-			this.sendPluginResult(jsonExitedRegion);
+			this.sendPluginResult(JsonRegion.toJson(region));
 		} catch (JSONException e) {
 			CordovaPluginLog.e(LOG_TAG, e.getMessage());
 			this.sendPluginResult(e);

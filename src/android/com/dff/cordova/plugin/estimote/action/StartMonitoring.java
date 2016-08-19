@@ -31,6 +31,7 @@ public class StartMonitoring extends EstimoteAction {
 				Region region = JsonRegion.fromJson(jsonArgs);
 				CordovaPluginLog.d(LOG_TAG, "startMonitoring: " + region.toString());
 				this.beaconManager.startMonitoring(region);
+				this.callbackContext.success();
 			}
 			else {
 				throw new Exception("args missing");

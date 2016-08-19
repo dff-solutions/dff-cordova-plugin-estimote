@@ -19,10 +19,8 @@ public class EnteredRegionCallbackHandler extends AbstractPluginListener {
 		CordovaPluginLog.d(LOG_TAG, "entered region: " + region.toString());
 		
 		try {
-			JSONObject jsonEnteredRegion = new JSONObject();
-			jsonEnteredRegion.put("region", JsonRegion.toJson(region));
-			jsonEnteredRegion.put("beacons", JsonBeacon.toJson(beacons));
-			
+			JSONObject jsonEnteredRegion = JsonRegion.toJson(region);
+			jsonEnteredRegion.put("beacons", JsonBeacon.toJson(beacons));			
 			this.sendPluginResult(jsonEnteredRegion);
 		} catch (JSONException e) {
 			CordovaPluginLog.e(LOG_TAG, e.getMessage());
