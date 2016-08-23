@@ -1,4 +1,4 @@
-package com.dff.cordova.plugin.estimote;
+package com.dff.cordova.plugin.estimote.monitor;
 
 import java.util.List;
 

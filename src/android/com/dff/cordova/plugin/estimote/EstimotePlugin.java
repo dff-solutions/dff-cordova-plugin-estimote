@@ -11,9 +11,13 @@ import org.json.JSONException;
 import com.dff.cordova.plugin.common.CommonPlugin;
 import com.dff.cordova.plugin.common.action.CordovaAction;
 import com.dff.cordova.plugin.common.log.CordovaPluginLog;
+import com.dff.cordova.plugin.estimote.action.Connect;
+import com.dff.cordova.plugin.estimote.action.Disconnect;
 import com.dff.cordova.plugin.estimote.action.EstimoteAction;
 import com.dff.cordova.plugin.estimote.action.StartMonitoring;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
+import com.dff.cordova.plugin.estimote.monitor.BeaconMonitoringListener;
+import com.dff.cordova.plugin.estimote.scan.BeaconScanStatusListener;
 import com.estimote.sdk.BeaconManager;
 
 import android.Manifest;
@@ -32,9 +36,12 @@ public class EstimotePlugin extends CommonPlugin {
 	private HashMap<String, Class<? extends EstimoteAction>> actions = new HashMap<String, Class<? extends EstimoteAction>>();
 	private BeaconManager beaconManager;
 	private BeaconMonitoringListener  beaconMonitoringListener;
+	private BeaconScanStatusListener scanStatusListener;
 	
 	public EstimotePlugin() {
 		super(LOG_TAG);
+		actions.put(Connect.ACTION_NAME, Connect.class);
+		actions.put(Disconnect.ACTION_NAME, Disconnect.class);
 		actions.put(StartMonitoring.ACTION_NAME, StartMonitoring.class);
 		actions.put(StopMonitoring.ACTION_NAME, StopMonitoring.class);
 	}
@@ -45,16 +52,12 @@ public class EstimotePlugin extends CommonPlugin {
 	@Override
 	public void pluginInitialize() {
 		super.pluginInitialize();
-		beaconManager = new BeaconManager(this.cordova.getActivity());
-		
-		beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-		    @Override
-		    public void onServiceReady() {
-		    }
-		});
-		
+		beaconManager = new BeaconManager(this.cordova.getActivity());		
 		beaconMonitoringListener = new BeaconMonitoringListener();
 		beaconManager.setMonitoringListener(this.beaconMonitoringListener);
+		
+		scanStatusListener = new BeaconScanStatusListener();
+		beaconManager.setScanStatusListener(scanStatusListener);
 	}
 	
     /**
@@ -132,6 +135,14 @@ public class EstimotePlugin extends CommonPlugin {
     	else if ("onExitedRegion".equals(action)) {
     		this.beaconMonitoringListener.setOnExitedRegionCallback(callbackContext);
     		return true;
+    	}
+    	else if ("onScanStart".equals(action)) {
+    		this.scanStatusListener.setOnScanStartCallback(callbackContext);    		
+    		return true;    		
+    	}
+    	else if ("onScanStop".equals(action)) {
+    		this.scanStatusListener.setOnScanStopCallback(callbackContext);    		
+    		return true;    		
     	}
     	else if (actions.containsKey(action)) {     		
      		Class<? extends EstimoteAction> actionClass = actions.get(action);
