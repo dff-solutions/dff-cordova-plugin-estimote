@@ -17,6 +17,7 @@ import com.dff.cordova.plugin.estimote.action.EstimoteAction;
 import com.dff.cordova.plugin.estimote.action.StartMonitoring;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
 import com.dff.cordova.plugin.estimote.monitor.BeaconMonitoringListener;
+import com.dff.cordova.plugin.estimote.nearable.NearableDiscoveryListener;
 import com.dff.cordova.plugin.estimote.scan.BeaconScanStatusListener;
 import com.estimote.sdk.BeaconManager;
 
@@ -37,6 +38,7 @@ public class EstimotePlugin extends CommonPlugin {
 	private BeaconManager beaconManager;
 	private BeaconMonitoringListener  beaconMonitoringListener;
 	private BeaconScanStatusListener scanStatusListener;
+	private NearableDiscoveryListener nearableListener;
 	
 	public EstimotePlugin() {
 		super(LOG_TAG);
@@ -58,6 +60,9 @@ public class EstimotePlugin extends CommonPlugin {
 		
 		scanStatusListener = new BeaconScanStatusListener();
 		beaconManager.setScanStatusListener(scanStatusListener);
+		
+		nearableListener = new NearableDiscoveryListener();
+		beaconManager.setNearableListener(nearableListener);
 	}
 	
     /**
@@ -143,6 +148,10 @@ public class EstimotePlugin extends CommonPlugin {
     	else if ("onScanStop".equals(action)) {
     		this.scanStatusListener.setOnScanStopCallback(callbackContext);    		
     		return true;    		
+    	}
+    	else if ("onNearablesDiscovered".equals(action)) {
+    		this.nearableListener.setCallBack(callbackContext);
+    		return true;
     	}
     	else if (actions.containsKey(action)) {     		
      		Class<? extends EstimoteAction> actionClass = actions.get(action);

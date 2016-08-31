@@ -19,6 +19,7 @@ var actions = [
     "onScanStop",
     "onEnteredRegion",
     "onExitedRegion",
+    "onNearablesDiscovered",
     "startMonitoring",
     "stopMonitoring"
 ];

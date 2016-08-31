@@ -27,8 +27,13 @@
         
         <source-file src="libs/estimote-sdk.aar" target-dir="libs" />
         
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/nearable/NearableDiscoveryListener.java" target-dir="src/com/dff/cordova/plugin/estimote/nearable" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonRegion.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBeacon.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBatteryLevel.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonNearable.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonNearableType.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBroadcastingPower.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StartMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/EstimoteAction.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StopMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
