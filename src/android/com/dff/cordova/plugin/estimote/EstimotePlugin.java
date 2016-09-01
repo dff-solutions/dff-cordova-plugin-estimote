@@ -15,7 +15,9 @@ import com.dff.cordova.plugin.estimote.action.Connect;
 import com.dff.cordova.plugin.estimote.action.Disconnect;
 import com.dff.cordova.plugin.estimote.action.EstimoteAction;
 import com.dff.cordova.plugin.estimote.action.StartMonitoring;
+import com.dff.cordova.plugin.estimote.action.StartNearableDiscovery;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
+import com.dff.cordova.plugin.estimote.action.StopNearableDiscovery;
 import com.dff.cordova.plugin.estimote.monitor.BeaconMonitoringListener;
 import com.dff.cordova.plugin.estimote.nearable.NearableDiscoveryListener;
 import com.dff.cordova.plugin.estimote.scan.BeaconScanStatusListener;
@@ -46,6 +48,8 @@ public class EstimotePlugin extends CommonPlugin {
 		actions.put(Disconnect.ACTION_NAME, Disconnect.class);
 		actions.put(StartMonitoring.ACTION_NAME, StartMonitoring.class);
 		actions.put(StopMonitoring.ACTION_NAME, StopMonitoring.class);
+		actions.put(StartNearableDiscovery.ACTION_NAME, StartNearableDiscovery.class);
+		actions.put(StopNearableDiscovery.ACTION_NAME, StopNearableDiscovery.class);
 	}
 	
    /**

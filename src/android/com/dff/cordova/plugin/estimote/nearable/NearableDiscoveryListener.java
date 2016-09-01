@@ -15,6 +15,8 @@ public class NearableDiscoveryListener extends AbstractPluginListener implements
 
 	@Override
 	public void onNearablesDiscovered(List<Nearable> nearables) {
+		CordovaPluginLog.d(LOG_TAG, "nearables discovered: " + nearables.toString());
+		
 		try {
 			this.sendPluginResult(JsonNearable.toJson(nearables));
 		}

@@ -20,6 +20,8 @@ var actions = [
     "onEnteredRegion",
     "onExitedRegion",
     "onNearablesDiscovered",
+    "startNearableDiscovery",
+    "stopNearableDiscovery",
     "startMonitoring",
     "stopMonitoring"
 ];
