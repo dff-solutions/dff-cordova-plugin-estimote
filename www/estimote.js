@@ -21,6 +21,7 @@ var actions = [
     "onExitedRegion",
     "onNearablesDiscovered",
     "onBeaconsDiscovered",
+    "onError",
     "startNearableDiscovery",
     "stopNearableDiscovery",
     "startMonitoring",

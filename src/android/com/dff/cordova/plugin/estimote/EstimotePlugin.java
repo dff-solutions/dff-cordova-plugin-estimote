@@ -22,6 +22,7 @@ import com.dff.cordova.plugin.estimote.action.StartRanging;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
 import com.dff.cordova.plugin.estimote.action.StopNearableDiscovery;
 import com.dff.cordova.plugin.estimote.action.StopRanging;
+import com.dff.cordova.plugin.estimote.error.BeaconErrorListener;
 import com.dff.cordova.plugin.estimote.monitor.BeaconMonitoringListener;
 import com.dff.cordova.plugin.estimote.nearable.NearableDiscoveryListener;
 import com.dff.cordova.plugin.estimote.ranging.BeaconRangingListener;
@@ -47,6 +48,7 @@ public class EstimotePlugin extends CommonPlugin {
 	private BeaconScanStatusListener scanStatusListener;
 	private NearableDiscoveryListener nearableListener;
 	private BeaconRangingListener rangingListener;
+	private BeaconErrorListener errorListener;
 	
 	public EstimotePlugin() {
 		super(LOG_TAG);
@@ -80,6 +82,9 @@ public class EstimotePlugin extends CommonPlugin {
 		
 		rangingListener = new BeaconRangingListener();
 		beaconManager.setRangingListener(this.rangingListener);
+		
+		errorListener = new BeaconErrorListener();
+		beaconManager.setErrorListener(errorListener);
 	}
 	
     /**
@@ -172,6 +177,10 @@ public class EstimotePlugin extends CommonPlugin {
     	}
     	else if ("onBeaconsDiscovered".equals(action)) {
     		this.rangingListener.setCallBack(callbackContext);
+    		return true;
+    	}
+    	else if ("onError".equals(action)) {
+    		this.errorListener.setCallBack(callbackContext);
     		return true;
     	}
     	else if (actions.containsKey(action)) {     		

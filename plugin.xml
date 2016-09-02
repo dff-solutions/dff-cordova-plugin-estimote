@@ -38,6 +38,7 @@
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StopMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StopNearableDiscovery.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StopRanging.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/error/BeaconErrorListener.java" target-dir="src/com/dff/cordova/plugin/estimote/error" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/EstimotePlugin.java" target-dir="src/com/dff/cordova/plugin/estimote" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBatteryLevel.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/json/model/JsonBeacon.java" target-dir="src/com/dff/cordova/plugin/estimote/json/model" />
