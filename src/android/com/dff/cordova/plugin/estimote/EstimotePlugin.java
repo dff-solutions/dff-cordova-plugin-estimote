@@ -16,10 +16,13 @@ import com.dff.cordova.plugin.estimote.action.Disconnect;
 import com.dff.cordova.plugin.estimote.action.EstimoteAction;
 import com.dff.cordova.plugin.estimote.action.StartMonitoring;
 import com.dff.cordova.plugin.estimote.action.StartNearableDiscovery;
+import com.dff.cordova.plugin.estimote.action.StartRanging;
 import com.dff.cordova.plugin.estimote.action.StopMonitoring;
 import com.dff.cordova.plugin.estimote.action.StopNearableDiscovery;
+import com.dff.cordova.plugin.estimote.action.StopRanging;
 import com.dff.cordova.plugin.estimote.monitor.BeaconMonitoringListener;
 import com.dff.cordova.plugin.estimote.nearable.NearableDiscoveryListener;
+import com.dff.cordova.plugin.estimote.ranging.BeaconRangingListener;
 import com.dff.cordova.plugin.estimote.scan.BeaconScanStatusListener;
 import com.estimote.sdk.BeaconManager;
 
@@ -41,6 +44,7 @@ public class EstimotePlugin extends CommonPlugin {
 	private BeaconMonitoringListener  beaconMonitoringListener;
 	private BeaconScanStatusListener scanStatusListener;
 	private NearableDiscoveryListener nearableListener;
+	private BeaconRangingListener rangingListener;
 	
 	public EstimotePlugin() {
 		super(LOG_TAG);
@@ -48,6 +52,8 @@ public class EstimotePlugin extends CommonPlugin {
 		actions.put(Disconnect.ACTION_NAME, Disconnect.class);
 		actions.put(StartMonitoring.ACTION_NAME, StartMonitoring.class);
 		actions.put(StopMonitoring.ACTION_NAME, StopMonitoring.class);
+		actions.put(StartRanging.ACTION_NAME, StartRanging.class);
+		actions.put(StopRanging.ACTION_NAME, StopRanging.class);
 		actions.put(StartNearableDiscovery.ACTION_NAME, StartNearableDiscovery.class);
 		actions.put(StopNearableDiscovery.ACTION_NAME, StopNearableDiscovery.class);
 	}
@@ -67,6 +73,9 @@ public class EstimotePlugin extends CommonPlugin {
 		
 		nearableListener = new NearableDiscoveryListener();
 		beaconManager.setNearableListener(nearableListener);
+		
+		rangingListener = new BeaconRangingListener();
+		beaconManager.setRangingListener(this.rangingListener);
 	}
 	
     /**
@@ -155,6 +164,10 @@ public class EstimotePlugin extends CommonPlugin {
     	}
     	else if ("onNearablesDiscovered".equals(action)) {
     		this.nearableListener.setCallBack(callbackContext);
+    		return true;
+    	}
+    	else if ("onBeaconsDiscovered".equals(action)) {
+    		this.rangingListener.setCallBack(callbackContext);
     		return true;
     	}
     	else if (actions.containsKey(action)) {     		

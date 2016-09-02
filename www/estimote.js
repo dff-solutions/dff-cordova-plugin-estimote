@@ -20,10 +20,13 @@ var actions = [
     "onEnteredRegion",
     "onExitedRegion",
     "onNearablesDiscovered",
+    "onBeaconsDiscovered",
     "startNearableDiscovery",
     "stopNearableDiscovery",
     "startMonitoring",
-    "stopMonitoring"
+    "stopMonitoring",
+    "startRanging",
+    "stopRanging"
 ];
 
 function createActionFunction(action) {
