@@ -26,7 +26,9 @@ var actions = [
     "startMonitoring",
     "stopMonitoring",
     "startRanging",
-    "stopRanging"
+    "stopRanging",
+    "setBackgroundScanPeriod",
+    "setForegroundScanPeriod"
 ];
 
 function createActionFunction(action) {

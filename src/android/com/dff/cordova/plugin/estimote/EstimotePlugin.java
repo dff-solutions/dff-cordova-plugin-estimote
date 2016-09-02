@@ -14,6 +14,8 @@ import com.dff.cordova.plugin.common.log.CordovaPluginLog;
 import com.dff.cordova.plugin.estimote.action.Connect;
 import com.dff.cordova.plugin.estimote.action.Disconnect;
 import com.dff.cordova.plugin.estimote.action.EstimoteAction;
+import com.dff.cordova.plugin.estimote.action.SetBackgroundScanPeriod;
+import com.dff.cordova.plugin.estimote.action.SetForegroundScanPeriod;
 import com.dff.cordova.plugin.estimote.action.StartMonitoring;
 import com.dff.cordova.plugin.estimote.action.StartNearableDiscovery;
 import com.dff.cordova.plugin.estimote.action.StartRanging;
@@ -56,6 +58,8 @@ public class EstimotePlugin extends CommonPlugin {
 		actions.put(StopRanging.ACTION_NAME, StopRanging.class);
 		actions.put(StartNearableDiscovery.ACTION_NAME, StartNearableDiscovery.class);
 		actions.put(StopNearableDiscovery.ACTION_NAME, StopNearableDiscovery.class);
+		actions.put(SetBackgroundScanPeriod.ACTION_NAME, SetBackgroundScanPeriod.class);
+		actions.put(SetForegroundScanPeriod.ACTION_NAME, SetForegroundScanPeriod.class);
 	}
 	
    /**

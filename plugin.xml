@@ -30,6 +30,8 @@
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/Connect.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/Disconnect.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/EstimoteAction.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/SetBackgroundScanPeriod.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
+		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/SetForegroundScanPeriod.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StartMonitoring.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StartNearableDiscovery.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/action/StartRanging.java" target-dir="src/com/dff/cordova/plugin/estimote/action" />
@@ -51,6 +53,7 @@
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/scan/BeaconScanStatusListener.java" target-dir="src/com/dff/cordova/plugin/estimote/scan" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/scan/ScanStartCallbackHandler.java" target-dir="src/com/dff/cordova/plugin/estimote/scan" />
 		<source-file src="src/android/com/dff/cordova/plugin/estimote/scan/ScanStopCallbackHandler.java" target-dir="src/com/dff/cordova/plugin/estimote/scan" />
+
 
     
      </platform>
