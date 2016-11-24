@@ -31,6 +31,7 @@ import com.estimote.sdk.BeaconManager;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 public class EstimotePlugin extends CommonPlugin {
 	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.EstimotePlugin";
@@ -115,14 +116,14 @@ public class EstimotePlugin extends CommonPlugin {
     	
     	super.onRequestPermissionResult(requestCode, permissions, grantResults);
     	
-    	CordovaPluginLog.d(LOG_TAG, "onRequestPermissionResult: " + requestCode);
+    	Log.d(LOG_TAG, "onRequestPermissionResult: " + requestCode);
     
     	for (int i = 0; i < grantResults.length; i++) {
     		int r = grantResults[i];
     		String p = permissions[i];
     		
     		if (r == PackageManager.PERMISSION_DENIED) {
-    			CordovaPluginLog.d(LOG_TAG, "permission denied for: " + p);
+    			CordovaPluginLog.w(LOG_TAG, "permission denied for: " + p);
     		}
     		else if (r == PackageManager.PERMISSION_GRANTED) {
     			CordovaPluginLog.d(LOG_TAG, "permission granted for: " + p);
@@ -151,7 +152,7 @@ public class EstimotePlugin extends CommonPlugin {
      		, final CallbackContext callbackContext)
          throws JSONException {
  		
-     	CordovaPluginLog.i(LOG_TAG, "call for action: " + action + "; args: " + args);
+     	Log.d(LOG_TAG, "call for action: " + action + "; args: " + args);
      	    	
      	CordovaAction cordovaAction = null;
     	
@@ -186,7 +187,7 @@ public class EstimotePlugin extends CommonPlugin {
     	else if (actions.containsKey(action)) {     		
      		Class<? extends EstimoteAction> actionClass = actions.get(action);
      		
-     		CordovaPluginLog.d(LOG_TAG, "found action: " + actionClass.getName());
+     		Log.d(LOG_TAG, "found action: " + actionClass.getName());
      		
      		try {
 				cordovaAction = actionClass.getConstructor(String.class
