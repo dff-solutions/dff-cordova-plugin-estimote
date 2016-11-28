@@ -12,7 +12,7 @@ import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
 public class StopMonitoring extends EstimoteAction {
-	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.action.StartMonitoring";
+	public static final String LOG_TAG = "com.dff.cordova.plugin.estimote.action.StopMonitoring";
 	public static final String ACTION_NAME = "stopMonitoring";
 
 	public StopMonitoring(String action, JSONArray args, CallbackContext callbackContext, CordovaInterface cordova,
@@ -30,7 +30,7 @@ public class StopMonitoring extends EstimoteAction {
 			if (jsonArgs != null) {
 				
 				Region region = JsonRegion.fromJson(jsonArgs);
-				CordovaPluginLog.d(LOG_TAG, "stopMonitoring: " + region.toString());				
+				CordovaPluginLog.d(LOG_TAG, "stopMonitoring: " + region.toString());
 				this.beaconManager.stopMonitoring(region);
 				this.callbackContext.success();
 			}
