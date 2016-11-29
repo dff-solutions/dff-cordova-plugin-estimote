@@ -19,7 +19,7 @@ public class JsonBeacon {
 		jsonBeacon.put("minor", beacon.getMinor());
 		jsonBeacon.put("rssi", beacon.getRssi());
 		jsonBeacon.put("macAddress", beacon.getMacAddress());
-		jsonBeacon.put("proximityUUID", beacon.getProximityUUID());
+		jsonBeacon.put("uuid", beacon.getProximityUUID());
 		
 		return jsonBeacon;
 	}
@@ -42,7 +42,7 @@ public class JsonBeacon {
 		int minor = -1;
 		int rssi = -1;
 		MacAddress macAddress = null;
-		UUID proximityUUID = null;
+		UUID uuid = null;
 		
 		if (!jsonBeacon.isNull("major")){
 			major = jsonBeacon.getInt("major");
@@ -69,10 +69,10 @@ public class JsonBeacon {
 		}
 		
 		
-		if (!jsonBeacon.isNull("proximityUUID")) {
-			proximityUUID = UUID.fromString(jsonBeacon.getString("proximityUUID"));
+		if (!jsonBeacon.isNull("uuid")) {
+			uuid = UUID.fromString(jsonBeacon.getString("uuid"));
 		}
 		
-		return new Beacon(proximityUUID, macAddress, major, minor, measuredPower, rssi);
+		return new Beacon(uuid, macAddress, major, minor, measuredPower, rssi);
 	}
 }

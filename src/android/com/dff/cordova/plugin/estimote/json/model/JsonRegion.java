@@ -14,14 +14,14 @@ public class JsonRegion {
 		jsonThread.put("identifier", region.getIdentifier());
 		jsonThread.put("major", region.getMajor());
 		jsonThread.put("minor", region.getMinor());
-		jsonThread.put("proximityUUID", region.getProximityUUID());
+		jsonThread.put("uuid", region.getProximityUUID());
 		
 		return jsonThread;
 	}
 	
 	public static Region fromJson(JSONObject jsonRegion) throws JSONException {
 		String identifier = null;
-		UUID proximityUUID = null;
+		UUID uuid = null;
 		Integer major = null;
 		Integer minor = null;
 		
@@ -37,10 +37,10 @@ public class JsonRegion {
 			minor = new Integer(jsonRegion.getInt("minor"));
 		}		
 		
-		if (!jsonRegion.isNull("proximityUUID")) {
-			proximityUUID = UUID.fromString(jsonRegion.getString("proximityUUID"));
+		if (!jsonRegion.isNull("uuid")) {
+			uuid = UUID.fromString(jsonRegion.getString("uuid"));
 		}
 		
-		return new Region(identifier, proximityUUID, major, minor);		
+		return new Region(identifier, uuid, major, minor);		
 	}
 }
