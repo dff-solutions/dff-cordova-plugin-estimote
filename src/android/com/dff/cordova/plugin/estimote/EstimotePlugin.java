@@ -71,7 +71,7 @@ public class EstimotePlugin extends CommonPlugin {
 	@Override
 	public void pluginInitialize() {
 		super.pluginInitialize();
-		beaconManager = new BeaconManager(this.cordova.getActivity());		
+		beaconManager = new BeaconManager(this.cordova.getActivity().getApplicationContext());
 		beaconMonitoringListener = new BeaconMonitoringListener();
 		beaconManager.setMonitoringListener(this.beaconMonitoringListener);
 		
