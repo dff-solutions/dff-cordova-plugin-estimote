@@ -22,6 +22,8 @@ Plugin is available via global `Estimote`.
 
 ### Actions
 
+
+#### connect
 ```js
 /**
  * Connect to estimote beacon manager.
@@ -38,6 +40,8 @@ Estimote
     });
 ```
 
+#### disconnect
+
 ```js
 /**
  * Disconnect from estimote beacon manager.
@@ -53,6 +57,8 @@ Estimote
     });
 ```
 
+
+#### onScanStart
 ```js
 /**
  * Listen to scan start events.
@@ -69,6 +75,8 @@ Estimote
     });
 ```
 
+
+#### onScanStop
 ```js
 /**
  * Listen to scan stop events.
@@ -85,6 +93,8 @@ Estimote
     });
 ```
 
+
+#### onEnteredRegion
 ```js
 /**
  * Listen to entered regions.
@@ -101,6 +111,8 @@ Estimote
     });
 ```
 
+
+#### onExitedRegion
 ```js
 /**
  * Listen to exited regions.
@@ -117,6 +129,8 @@ Estimote
     });
 ```
 
+
+#### onNearablesDiscovered
 ```js
 /**
  * Listen to discovered nearabels.
@@ -133,6 +147,8 @@ Estimote
     });
 ```
 
+
+#### onBeaconsDiscovered
 ```js
 /**
  * Listen to discovered beacons.
@@ -149,6 +165,8 @@ Estimote
     });
 ```
 
+
+#### onError
 ```js
 /**
  * Listen to error with beacons.
@@ -166,6 +184,8 @@ Estimote
 ```
 
 ```js
+
+#### startNearableDiscovery
 /**
  * Start nearable discovery.
  * Resolves with scan identifier which is required to stop scanning
@@ -180,6 +200,8 @@ Estimote
     }, function (reason) {
         console.error(reason);
     });
+
+    #### stopNearableDiscovery
 ```
 
 ```js
@@ -201,6 +223,8 @@ Estimote
 ```
 
 ```js
+
+#### startMonitoring
 /**
  * Starts beacon monitoring. You can monitor multiple regions at the same time.
  * Listener will be called for each region separately.
@@ -227,6 +251,8 @@ Estimote
     });
 ```
 
+
+#### stopMonitoring
 ```js
 /**
  * Stops region monitoring that was previously started with startMonitoring.
@@ -256,7 +282,9 @@ Estimote
 ```js
 /**
  * Starts ranging given range.
- * Ranging results will be delivered to listener registered via setRangingListener(RangingListener).
+ * Rangin
+
+ #### startRangingg results will be delivered to listener registered via setRangingListener(RangingListener).
  * If given region is already ranged, this is no-op.
  * You can range multiple regions at the same time.
  * Listener will be called for each region separately.
@@ -283,6 +311,8 @@ Estimote
     });
 ```
 
+
+#### stopRanging
 ```js
 /**
  * Stops ranging for beacons that was starting with startRanging method.
@@ -309,6 +339,8 @@ Estimote
     });
 ```
 
+#### setBackgroundScanPeriod
+
 ```js
 /**
  * Changes defaults scanning periods when only monitoring is performed.
@@ -329,6 +361,8 @@ Estimote
     });
 ```
 
+
+#### setForegroundScanPeriod
 ```js
 /**
  * Changes defaults scanning periods when ranging is performed.
