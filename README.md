@@ -183,9 +183,9 @@ Estimote
     });
 ```
 
-```js
-
 #### startNearableDiscovery
+
+```js
 /**
  * Start nearable discovery.
  * Resolves with scan identifier which is required to stop scanning
@@ -200,9 +200,9 @@ Estimote
     }, function (reason) {
         console.error(reason);
     });
-
-    #### stopNearableDiscovery
 ```
+
+#### stopNearableDiscovery
 
 ```js
 /**
@@ -222,9 +222,9 @@ Estimote
     });
 ```
 
-```js
-
 #### startMonitoring
+
+```js
 /**
  * Starts beacon monitoring. You can monitor multiple regions at the same time.
  * Listener will be called for each region separately.
@@ -279,12 +279,12 @@ Estimote
     });
 ```
 
+#### startRanging
+
 ```js
 /**
  * Starts ranging given range.
- * Rangin
-
- #### startRangingg results will be delivered to listener registered via setRangingListener(RangingListener).
+ * Ranging results will be delivered to listener registered via setRangingListener(RangingListener).
  * If given region is already ranged, this is no-op.
  * You can range multiple regions at the same time.
  * Listener will be called for each region separately.
